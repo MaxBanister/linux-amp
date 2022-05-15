@@ -55,7 +55,8 @@ enum sbi_ext_time_fid {
 };
 
 enum sbi_ext_ipi_fid {
-	SBI_EXT_IPI_SEND_IPI = 0,
+	SBI_EXT_IPI_SEND_IPI     = 0,
+	SBI_EXT_IPI_SEND_IPI_RAW = 1,
 };
 
 enum sbi_ext_rfence_fid {

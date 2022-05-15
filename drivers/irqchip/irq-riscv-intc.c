@@ -17,6 +17,8 @@
 #include <linux/of.h>
 #include <linux/smp.h>
 
+void saturn_handle_interrupt(void);
+
 static struct irq_domain *intc_domain;
 
 static asmlinkage void riscv_intc_irq(struct pt_regs *regs)
@@ -33,7 +35,10 @@ static asmlinkage void riscv_intc_irq(struct pt_regs *regs)
 		 * We only use software interrupts to pass IPIs, so if a
 		 * non-SMP system gets one, then we don't know what to do.
 		 */
-		handle_IPI(regs);
+
+		saturn_handle_interrupt();
+
+		//handle_IPI(regs);
 		break;
 #endif
 	default:

@@ -9,6 +9,7 @@
 #include <linux/init.h>
 #include <linux/pm.h>
 #include <linux/reboot.h>
+#include <linux/cpumask.h>
 #include <asm/sbi.h>
 #include <asm/smp.h>
 
@@ -259,6 +260,7 @@ static int __sbi_send_ipi_v02(const struct cpumask *cpu_mask)
 
 	for_each_cpu(cpuid, cpu_mask) {
 		hartid = cpuid_to_hartid_map(cpuid);
+
 		if (hmask) {
 			if (hartid + BITS_PER_LONG <= htop ||
 			    hbase + BITS_PER_LONG <= hartid) {
@@ -274,6 +276,7 @@ static int __sbi_send_ipi_v02(const struct cpumask *cpu_mask)
 				hbase = hartid;
 			}
 		}
+
 		if (!hmask) {
 			hbase = hartid;
 			htop = hartid;
